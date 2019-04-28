@@ -1,0 +1,29 @@
+{# prj/templates/layout.html#}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}JY's{% endblock %}</title>
+
+    {% block extra_head %}
+        <link rel="stylesheet" href="{% static 'main.css' %}" />
+    {% endblock %}
+</head>
+<body>
+    <h1>주영</h1>
+
+    {% block content %}
+        <img src="{% static '타타.png' %}" alt="main logo image">
+        <h1>JY's HomePage</h1>
+    {% endblock %}
+
+    <hr/>
+    No &copy;! <img src="http://www.pngmart.com/files/8/Copyleft-PNG-Transparent-Picture.png" height="42" width="42" style="margin-bottom: -5px" />2019. logistex.
+
+    {% block extra_body %}
+        <script src="{% static 'main.js' %}"></script>
+    {% endblock %} {# 자바스크립트 등을 위하여 #}
+</body>
+</html>

@@ -1,0 +1,133 @@
+{% extends './layout.html' %}  {# '/blog/layout.html'로 하면 오류 #}
+
+{% block content %}
+    {{ block.super }}
+    <a href="{% url 'blog:post_list' %}">게시판 목록으로 돌아가기</a><br/><br/>
+
+    <form>
+    <fieldset>
+    <table>
+        <thead>
+            <th>필드</th><th>내용</th>
+        </thead>
+        <tbody>
+        <tr>
+            <td width="10%">id:</td><td><input type="text" value={{ post.id }}></td>
+        </tr>
+        <tr>
+            <td>게시자:</td><td><input type="text" value="{{ post.author }}"></td>
+        </tr>
+        <tr>
+            <td>제목:</td><td><input type="text" value="{{ post.title }}" style="width:300px;"></td>
+        </tr>
+        <tr>
+            <td>간략 내용:</td><td><input type="text" value="{{ post.short_content }}"  style="width:300px;"></td>
+        </tr>
+        <tr>
+            <td>내용:</td>
+            <td><textarea style="width: 400px; height: 200px; overflow: visible;">{{ post.content }}</textarea></td>
+        </tr>
+        <tr>
+            <td>게시 일시:</td><td><input type="text" value="{{ post.created }}"></td>
+        </tr>
+        <tr>
+            <td>수정 일시:</td><td><input type="text" value="{{ post.updated_at }}"></td>
+        </tr>
+        <tr>
+            <td>태그 집합:</td><td><input type="text" value="{{ post.tagged }}"></td>
+        </tr>
+        </tbody>
+    </table>
+    </fieldset>
+    </form> <br/>
+
+    {# https://python.bakyeono.net/chapter-7-2.html #}
+        `for key, value in my_tag.items`:
+        {% for key, value in my_tag.items %}
+            {% if value > 0 %}
+                <input type="checkbox" name={{ key }} checked>
+            {% else %}
+                <input type="checkbox" name={{ key }}>
+            {% endif %}
+            <label for={{ key }}> {{ key }} </label>
+        {% endfor %} <br/>
+        <hr>
+<table>
+        <thead>
+            <th>id</th>
+            <th>댓글</th>
+            <th>작성 일시</th>
+            <th>수정 일시</th>
+        </thead>
+        <tbody>
+        {% for c in post.comments.all %}
+            <tr>
+                <td>{{ c.id }}</td>
+                <td>{{ c.message }}</td>
+                <td>{{ c.created_at }}</td>
+                <td>{{ c.updated }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+    post.tagged: {{ post.tagged }} <br/>
+    post.tags.all: {{ post.tags.all }} <br/><br/>
+
+    `for key, value in my_tag.items`: <br/>
+    {% for key, value in my_tag.items %}
+        키: {{ key }} 값: {{ value }} <br/>
+    {% endfor %} <br/><br/>
+
+
+
+   <form>
+    <fieldset>
+        id:         <input type="text" value={{ post.id }}> <br/>
+        게시자:     <input type="text" value="{{ post.author }}"> <br/>
+        제목:       <input type="text" value="{{ post.title }}"> <br/>
+        간략 내용:  <input type="text" value="{{ post.short_content }}"> <br/>
+        내용:       <input type="text" value="{{ post.content|linebreaksbr }}"> <br/>
+        내용:       {{ post.content|linebreaksbr }} <br/>
+        내용:       <textarea style="width: 200px; height: 200px;">{{ post.content }}</textarea> <br/>
+        내용:       <textarea style="width: 200px; height: 200px;">{{ post.content|linebreaksbr }}</textarea> <br/>
+        수정 일시:  <input type="text" value="{{ post.updated }}"> <br/>
+        게시 일시:  <input type="text" value="{{ post.created_at }}"> <br/>
+        태그 집합:  <input type="text" value="{{ post.tagged }}"> <br/>
+    </fieldset>
+    </form> <br/>
+
+    post: {{ post.id }}#{{ post.author }}#{{ post.title }}#
+            {{ post.short_content }}#{{ post.updated }}#
+            {{ post.created_at }}#{{ post.tagged }}<br/><br/>
+
+    id: {{ post.id }}<br/>
+    게시자: {{ post.author }}<br/>
+    제목: {{ post.title }}<br/>
+    간략 내용: {{ post.short_content }}<br/>
+    내용: {{ post.content|linebreaksbr }}<br/>
+    수정 일시: {{ post.updated }}<br/>
+    게시 일시: {{ post.created_at }}<br/>
+    태그 집합: {{ post.tagged }}<br/><br/>
+
+    post: {{ post }}<br/><br/>
+
+    <hr>
+    post.comments.all: {{ post.comments.all }} <br/><br/>
+
+    post.comments.first: {{ post.comments.first }} <br/><br/>
+
+    post.comments.last: {{ post.comments.last }} <br/><br/>
+
+    for c in post.comments.all:<br/>
+    {% for c in  post.comments.all %}
+        {{ c }} <br/>
+    {% endfor %}<br/>
+
+    for c in post.comments.all:<br/>
+    {% for c in  post.comments.all %}
+            {{ c.id }}#{{ c.post }}#{{ c.message }}#{{ c.created_at }}#{{ c.updated }}<br/>
+    {% endfor %}<br/>
+
+{% endblock content %}

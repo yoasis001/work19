@@ -1,0 +1,22 @@
+/* prj/static/main.css */
+body {background-color: antiquewhite}
+table {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+table td, table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+table tr:nth-child(even){background-color: rgba(200, 255, 97, 0.52);}
+table tr:nth-child(odd){background-color: rgba(188, 151, 29, 0.4);}
+table tr:hover {background-color: #ddd;}
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+

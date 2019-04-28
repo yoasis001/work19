@@ -1,0 +1,91 @@
+{% extends './layout.html' %}
+
+{% block content %}
+    {{ block.super }}
+    <h5>post_list 테이블 형식 출력</h5>
+    <table>
+        <thead>
+            <th>id</th>
+            <th>게시자</th>
+            <th>제목</th>
+            <th>간략 내용</th>
+            <th>작성 일시</th>
+            <th>수정 일시</th>
+            <th>태그 집합</th>
+        </thead>
+        <tbody>
+        {% for post in post_list %}
+        <tr>
+{#        <tr style="background-color:#}
+{#        {% ifchanged post.id %}#}
+{#            {% cycle 'yellow' 'pink' %}#}
+{#        {% else %}#}
+{#            'gray'#}
+{#        {% endifchanged %}"#}
+{#        >#}
+            <td>{{ post.id }}</td>
+            <td>{{ post.author }}</td>
+            <td>
+                <a href="{{ post.get_absolute_url }}">
+{#                <a href="/blog/{{ post.pk }}">#}
+                    {# href="blog/..."로 하면 오류!!! #}
+                    {{ post.title }}
+                </a>
+            </td>
+            <td>{{ post.short_content }}</td>
+            <td>{{ post.created }}</td>
+            <td>{{ post.updated_at }}</td>
+            <td>{{ post.tagged }}</td>
+        </tr>
+       {% endfor %}
+        </tbody>
+    </table><br/>
+
+{#    <h5>post_list 통째로 출력</h5>#}
+{#    post_list: {{ post_list }}<br/>#}
+{##}
+{#    <h5>post_list 내부의 post 통째로 출력</h5>#}
+{#        {% for post in post_list %}#}
+{#            post: {{ post }}<br/>#}
+{#        {% endfor %}<br/>#}
+{##}
+{#    <h5>post_list 내부의 post 속성 출력</h5>#}
+{#    {% for post in post_list %}#}
+{#        post: {{ post.id }}#{{ post.author }}#{{ post.title }}##}
+{#            {{ post.content }}#{{ post.created_at }}##}
+{#            {{ post.updated_at }}#{{ post.tags }}<br/>#}
+{#    {% endfor %}<br/>#}
+{##}
+{#    <h5>post_list 내부의 post 메소드 출력</h5>#}
+{#    {% for post in post_list %}#}
+{#        post: {{ post.id }}#{{ post.author }}#{{ post.title }}##}
+{#            {{ post.short_content }}#{{ post.updated }}##}
+{#            {{ post.updated_at }}#{{ post.tagged }}<br/>#}
+{#            {% verbatim %} {{ post.id|add:1 }} {% endverbatim %}#}
+{#                {{ post.id|add:1 }} <br/>#}
+{#            {% verbatim %} {{ post.id|add:"love" }} {% endverbatim %}#}
+{#                {{ post.id|add:"love" }} <br/>#}
+{#            {% verbatim %} {{ post.id|add:"1" }} {% endverbatim %}#}
+{#                {{ post.id|add:1 }} <br/>#}
+{#            {% verbatim %} {{ post.tags.all }} {% endverbatim %}#}
+{#                {{ post.tags.all }} <br/>#}
+{#            {% verbatim %} {{ post.title|cut:" " }} {% endverbatim %}#}
+{#                {{ post.title|cut:" " }} <br/>#}
+{#            {% verbatim %}#}
+{#                {{ post.tagged|cut:"{"|cut:"}"|default:"태그 없음" }}#}
+{#            {% endverbatim %}#}
+{#                {{ post.tagged|cut:"{"|cut:"}"|default:"태그 없음" }} <br/>#}
+{#            {% verbatim %} { {{ post.tags.all|join:", " }} } {% endverbatim %}#}
+{#                { {{ post.tags.all|join:", " }} } <br/>#}
+{#            {% verbatim %} {{ post.content|linebreaks }} {% endverbatim %} <br/>#}
+{#                {{ post.content|linebreaks }} <br/>#}
+{#            {% verbatim %} {{ post.content|linebreaksbr }} {% endverbatim %}#}
+{#                <br/>{{ post.content|linebreaksbr }} <br/>#}
+{#            {% verbatim %} {{ post.author.email }} {% endverbatim %}#}
+{#                {{ post.author.email }} <br/>#}
+{#            {% verbatim %} {{ post.author.email|urlize }} {% endverbatim %}#}
+{#                {{ post.author.email|urlize }} <br/>#}
+{#            <br/>#}
+{#    {% endfor %}<br/>#}
+
+{% endblock %}

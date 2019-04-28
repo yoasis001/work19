@@ -1,0 +1,76 @@
+<!-- shop/templates/shop/item_list.html -->
+{% extends './layout.html' %}
+{% load humanize %}
+
+{% block content %}
+    {{ block.super }}
+    <form action="" method="GET">
+        <input type="text" name="q" value="{{ q }}" />
+        <input type="submit" value="검색" />
+    </form>
+    <hr>
+    <table>
+        <thead>
+            <th>번호</th>
+            <th>이름</th>
+            <th>설명</th>
+            <th>가격</th>
+            <th>사진</th>
+            <th>출시 여부</th>
+            <th>수정</th>
+            <th>삭제</th>
+        </thead>
+        <tbody>
+            {% for item in item_list %}
+            <tr>
+                <td align="right"> {{ item.id }} </td>
+                <td>
+                    <a href="{{ item.get_absolute_url }}">
+                        {{ item.name }}
+                    </a>
+                </td>
+                <td> {{ item.desc|truncatechars:15 }} </td>
+                <td align="right"> {{ item.price|intcomma }} 원</td>
+                <td> {{ item.photo }} </td>
+                <td><input type="checkbox" name="item.is_published" value="1"
+                       {% if item.is_published %}checked{% endif %} />
+                </td>
+                <td>
+                    <a href="{% url 'shop:item_edit' item.pk %}">
+                        수정
+                    </a>
+                </td>
+                <td>
+                    <a href="{% url 'shop:item_remove' item.pk %}">
+                        삭제
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table> <br/><br/>
+
+<a href="{% url 'shop:item_new' %}">새 상품 등록</a>
+
+{#    {{ request }} <br/>#}
+{#    request.method: {{ request.method }} <br/>#}
+{#    request.GET: {{ request.GET }} <br/>#}
+{#    request.META: {{ request.META }}#}
+{#    <hr/>#}
+{#    {{ item_list }}#}
+{#    <hr>#}
+{#    {% for item in item_list %}#}
+{#        {{ item }} <br>#}
+{#    {% endfor %}#}
+{#    <hr>#}
+{#    {% for item in item_list %}#}
+{#        {{ item.name }} ##}
+{#        {{ item.desc }} ##}
+{#        {{ item.photo }} ##}
+{#        {{ item.created_at }} ##}
+{#        {{ item.updated_at }} <br/>#}
+{#        {% if item.photo %}#}
+{#            <img src="{{ item.photo.url }}" />#}
+{#        {% endif %} <br/>#}
+{#    {% endfor %}#}
+{% endblock %}

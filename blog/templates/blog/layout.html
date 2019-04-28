@@ -1,0 +1,23 @@
+{% extends '../layout.html' %} {# 프로젝트 수준 layout.html 템플릿을 상속받음 #}
+
+{% load static %}
+
+{% block title %}
+    {{ block.super }} blog
+{% endblock %}
+
+{% block extra_head %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'blog/blog.css' %}" />
+{% endblock %}
+
+{% block content %}
+    {{ block.super }}
+    <img src="{% static 'blog/casual_shin.png' %}" alt="blog logo image">
+    <h2>blog in logistex site </h2>
+{% endblock %}
+
+{% block extra_body %}
+    {{ block.super }}
+    <script src="{% static 'blog/blog.js' %}"></script>
+{% endblock %}
